@@ -38,8 +38,10 @@ public class Room {
         }
     }
 
-    public boolean isPassword(String password) {
-        return this.password.equals(password);
+    public void checkPassword(String password) {
+        if (!Objects.equals(password, this.password)) {
+            throw new IllegalArgumentException("비밀번호를 확인하세요.");
+        }
     }
 
     public void end() {

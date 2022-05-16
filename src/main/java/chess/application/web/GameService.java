@@ -125,9 +125,7 @@ public class GameService {
     }
 
     private void checkPassword(Room room, String password) {
-        if (!room.isPassword(password)) {
-            throw new IllegalArgumentException("비밀번호를 확인하세요.");
-        }
+        room.checkPassword(password);
     }
 
     private void checkStatus(Room room) {
