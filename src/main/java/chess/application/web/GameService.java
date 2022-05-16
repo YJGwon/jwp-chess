@@ -117,20 +117,9 @@ public class GameService {
 
     public void delete(long roomNo, String password) {
         Room room = roomDao.load(roomNo);
-        checkPassword(room, password);
-        checkStatus(room);
+        room.delete(password);
         boardDao.delete(gameDao.findNoByRoom(roomNo));
         gameDao.delete(roomNo);
         roomDao.delete(roomNo);
-    }
-
-    private void checkPassword(Room room, String password) {
-        room.checkPassword(password);
-    }
-
-    private void checkStatus(Room room) {
-        if (room.isRunning()) {
-            throw new IllegalStateException("진행 중인 게임은 삭제할 수 없습니다.");
-        }
     }
 }

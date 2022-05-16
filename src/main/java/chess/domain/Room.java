@@ -38,9 +38,20 @@ public class Room {
         }
     }
 
-    public void checkPassword(String password) {
+    public void delete(String password) {
+        checkPassword(password);
+        checkStatus();
+    }
+
+    private void checkPassword(String password) {
         if (!Objects.equals(password, this.password)) {
             throw new IllegalArgumentException("비밀번호를 확인하세요.");
+        }
+    }
+
+    private void checkStatus() {
+        if (running) {
+            throw new IllegalStateException("진행 중인 게임은 삭제할 수 없습니다.");
         }
     }
 
