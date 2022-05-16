@@ -31,7 +31,7 @@ public class ExceptionController {
     }
 
     @ExceptionHandler
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public String handle(Exception exception, Model model) {
         model.addAttribute("error", exception.getMessage());
         return "error";
