@@ -9,9 +9,11 @@ import chess.dao.RoomDao;
 import chess.domain.Camp;
 import chess.domain.ChessGame;
 import chess.domain.Room;
+import chess.domain.Score;
 import chess.domain.board.Position;
 import chess.domain.piece.Piece;
 import chess.dto.PieceDto;
+import chess.dto.ScoreDto;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,9 +78,9 @@ public class GameService {
         boardDao.update(gameDao.findNoByRoom(roomNo), chessGame.getBoardSquares());
     }
 
-    public Map<String, Object> modelStatus(long roomNo) {
-        return loadGame(roomNo).getScores().entrySet().stream()
-                .collect(Collectors.toMap(entry -> entry.getKey().toString(), Map.Entry::getValue));
+    public ScoreDto scoresOf(long roomNo) {
+        Map<Camp, Score> scores = loadGame(roomNo).getScores();
+        return ScoreDto.from(scores);
     }
 
     public Map<String, Object> end(long roomNo) {

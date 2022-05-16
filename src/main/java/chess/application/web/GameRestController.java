@@ -1,8 +1,8 @@
 package chess.application.web;
 
 import chess.domain.Room;
+import chess.dto.ScoreDto;
 import java.util.List;
-import java.util.Map;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +22,7 @@ public class GameRestController {
     }
 
     @GetMapping("/score/{gameNo}")
-    public ResponseEntity<Map<String, Object>> status(@PathVariable int gameNo) {
-        return ResponseEntity.ok().body(gameService.modelStatus(gameNo));
+    public ResponseEntity<ScoreDto> status(@PathVariable int gameNo) {
+        return ResponseEntity.ok().body(gameService.scoresOf(gameNo));
     }
 }
